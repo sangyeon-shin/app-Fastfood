@@ -17,8 +17,8 @@ import com.google.android.material.tabs.TabLayout;
 public class MainActivity extends AppCompatActivity {
 
     Fragment fragment0, fragment1, fragment2, fragment3, fragment4, fragment5;
-    DBHelper helper;
     SQLiteDatabase db;
+    //MyAsyncTask mTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,10 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar(); // 액션바를 가져온다
         actionBar.setDisplayShowCustomEnabled(true); // 액션바 커스텀 가능하게 해준다.
         actionBar.setDisplayShowTitleEnabled(false); // 기본 제목을 없애줍니다.
+
+
+        //LoadListViewActivity list = new LoadListViewActivity();
+
 
         //각각의 레이아웃 조각 생성
         fragment0 = new Fragment0();
@@ -49,26 +53,33 @@ public class MainActivity extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
 
                 int position = tab.getPosition();
+                String classification = null;
 
                 Fragment selected = null;
                 if(position == 0){
                     selected = fragment0;
-
+                    classification = "hamburger";
+                    //list.execute(classification).get();
                 }else if (position == 1){
                     selected = fragment1;
-
+                    classification = "chicken";
+                    //list.execute(classification).get();
                 }else if (position == 2){
                     selected = fragment2;
-
+                    classification = "pizza";
+                    //list.execute(classification).get();
                 }else if (position == 3){
                     selected = fragment3;
-
+                    classification = "snack";
+                    //list.execute(classification).get();
                 }else if (position == 4){
                     selected = fragment4;
-
+                    classification = "cafe";
+                    //list.execute(classification).get();
                 }else if (position == 5){
                     selected = fragment5;
-
+                    classification = "etc";
+                    //list.execute(classification).get();
                 }
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame, selected).commit();
