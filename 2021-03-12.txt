@@ -1,0 +1,1 @@
+기존 코드랑 bottomnavigation을 합치려다가 실패
