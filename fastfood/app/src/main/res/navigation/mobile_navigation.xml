@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="kr.sy.android.fastfood.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_dashboard1"
+        android:name="kr.sy.android.fastfood.ui.dashboard1.DashboardFragment1"
+        android:label="@string/title_dashboard1"
+        tools:layout="@layout/fragment_dashboard1" />
+
+    <fragment
+        android:id="@+id/navigation_dashboard2"
+        android:name="kr.sy.android.fastfood.ui.dashboard2.DashboardFragment2"
+        android:label="@string/title_dashboard2"
+        tools:layout="@layout/fragment_dashboard2" />
+
+    <fragment
+        android:id="@+id/navigation_dashboard3"
+        android:name="kr.sy.android.fastfood.ui.dashboard3.DashboardFragment3"
+        android:label="@string/title_dashboard3"
+        tools:layout="@layout/fragment_dashboard3" />
+
+    <fragment
+        android:id="@+id/navigation_dashboard4"
+        android:name="kr.sy.android.fastfood.ui.dashboard4.DashboardFragment4"
+        android:label="@string/title_dashboard4"
+        tools:layout="@layout/fragment_dashboard4" />
+</navigation>
