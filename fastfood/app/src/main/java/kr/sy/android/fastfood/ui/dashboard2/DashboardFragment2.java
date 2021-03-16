@@ -22,6 +22,7 @@ public class DashboardFragment2 extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         dashboardViewModel =
                 new ViewModelProvider(this).get(kr.sy.android.fastfood.ui.dashboard2.DashboardViewModel2.class);
+        onResume();
         View root = inflater.inflate(R.layout.fragment_dashboard2, container, false);
         /* final TextView textView = root.findViewById(R.id.text_dashboard);
         dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {

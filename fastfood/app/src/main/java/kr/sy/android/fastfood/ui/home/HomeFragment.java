@@ -1,5 +1,6 @@
 package kr.sy.android.fastfood.ui.home;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,14 +10,31 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.tabs.TabLayout;
+
 import kr.sy.android.fastfood.R;
+import kr.sy.android.fastfood.ui.home.tab_0.TabFragment_0;
+import kr.sy.android.fastfood.ui.home.tab_1.TabFragment_1;
+import kr.sy.android.fastfood.ui.home.tab_2.TabFragment_2;
+import kr.sy.android.fastfood.ui.home.tab_3.TabFragment_3;
+import kr.sy.android.fastfood.ui.home.tab_4.TabFragment_4;
+import kr.sy.android.fastfood.ui.home.tab_5.TabFragment_5;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
+    private FragmentActivity myContext;
+    Fragment fragment0, fragment1, fragment2, fragment3, fragment4, fragment5;
+
+    @Override
+    public void onAttach(Activity activity) {
+        myContext=(FragmentActivity) activity;
+        super.onAttach(activity);
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -30,6 +48,68 @@ public class HomeFragment extends Fragment {
                 textView.setText(s);
             }
         }); */
+
+        //각각의 레이아웃 조각 생성
+        fragment0 = new TabFragment_0();
+        fragment1 = new TabFragment_1();
+        fragment2 = new TabFragment_2();
+        fragment3 = new TabFragment_3();
+        fragment4 = new TabFragment_4();
+        fragment5 = new TabFragment_5();
+
+        TabLayout tabs = (TabLayout) root.findViewById(R.id.tabLayout); // TabLayout 뷰를 가져온다.
+        myContext.getSupportFragmentManager().beginTransaction().replace(R.id.frame, fragment0).commit();
+
+        // 탭 레이아웃을 추가합니다.탭 선택이 변경될 때 호출되는 탭 선택 수신기입니다.
+        tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+
+                int position = tab.getPosition();
+                String classification = null;
+
+                Fragment selected = null;
+                if(position == 0){
+                    selected = fragment0;
+                    classification = "hamburger";
+                    //list.execute(classification).get();
+                }else if (position == 1){
+                    selected = fragment1;
+                    classification = "chicken";
+                    //list.execute(classification).get();
+                }else if (position == 2){
+                    selected = fragment2;
+                    classification = "pizza";
+                    //list.execute(classification).get();
+                }else if (position == 3){
+                    selected = fragment3;
+                    classification = "snack";
+                    //list.execute(classification).get();
+                }else if (position == 4){
+                    selected = fragment4;
+                    classification = "cafe";
+                    //list.execute(classification).get();
+                }else if (position == 5){
+                    selected = fragment5;
+                    classification = "etc";
+                    //list.execute(classification).get();
+                }
+
+                myContext.getSupportFragmentManager().beginTransaction().replace(R.id.frame, selected).commit();
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
         return root;
     }
+
 }

@@ -22,6 +22,7 @@ public class DashboardFragment4 extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         dashboardViewModel =
                 new ViewModelProvider(this).get(DashboardViewModel4.class);
+        onResume();
         View root = inflater.inflate(R.layout.fragment_dashboard4, container, false);
         /*final TextView textView = root.findViewById(R.id.text_dashboard);
         dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {

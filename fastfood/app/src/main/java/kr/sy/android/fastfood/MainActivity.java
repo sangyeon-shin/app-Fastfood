@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar); // 찾아온 view를 ActionBar로 설정
         ActionBar actionBar = getSupportActionBar(); // 액션바를 가져온다
         actionBar.setDisplayShowCustomEnabled(true); // 액션바 커스텀 가능하게 해준다.
-        actionBar.setDisplayShowTitleEnabled(true); // 기본 제목을 없애줍니다.
+        actionBar.setDisplayShowTitleEnabled(false); // 기본 제목을 없애줍니다.
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
