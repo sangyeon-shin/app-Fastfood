@@ -3,11 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/listImage"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="1"/>
+        android:orientation="vertical"
+        android:layout_weight="1">
+        <ImageView
+            android:id="@+id/listViewLogo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="0sp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -15,22 +25,14 @@
         android:layout_weight="4">
 
         <TextView
-            android:id="@+id/listFranchise"
+            android:id="@+id/listViewCompanyName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="New Text"
-            android:textSize="24sp"
+            android:text="name"
+            android:textSize="20sp"
             android:textColor="#000000"
             android:gravity="center_vertical"
             android:layout_weight="2"/>
-
-        <TextView
-            android:id="@+id/listDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="#666666"
-            android:layout_weight="1"/>
 
     </LinearLayout>
 </LinearLayout>
