@@ -41,14 +41,14 @@ public class ListViewAdapter extends BaseAdapter {
         }
 
         //화면에 표시될 View(Layout이 inflate된)으로부터 위젯에 대한 참조 획득
-        TextView companyLogo = (TextView) convertView.findViewById(R.id.listViewLogo);
+        ImageView companyLogo = (ImageView) convertView.findViewById(R.id.listViewLogo);
         TextView companyName = (TextView) convertView.findViewById(R.id.listViewCompanyName);
 
         //Data Seet(listViewItemList)에서 position에 위치한 데이터 참조 획득
         TabListViewModel_0 listViewItem = listViewItemList.get(position);
 
         // 아이템 내 각 위젯에 데이터 반영
-        companyLogo.setText(listViewItem.getImage());
+        //companyLogo.setImageIcon();
         companyName.setText(listViewItem.getCompany_name());
 
         return convertView;
@@ -67,10 +67,10 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     //아이템 데이터 추가를 위한 함수, 개발자가 원하는대로 작성 가능.
-    public void addItem(String logo,String name){
+    public void addItem(String name){
         TabListViewModel_0 item = new TabListViewModel_0();
 
-        item.setImage(logo);
+        //item.setImage(logo);
         item.setCompany_name(name);
 
         listViewItemList.add(item);
