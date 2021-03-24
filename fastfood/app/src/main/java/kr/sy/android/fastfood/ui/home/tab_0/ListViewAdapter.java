@@ -67,12 +67,7 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     //아이템 데이터 추가를 위한 함수, 개발자가 원하는대로 작성 가능.
-    public void addItem(String name){
-        TabListViewModel_0 item = new TabListViewModel_0();
-
-        //item.setImage(logo);
-        item.setCompany_name(name);
-
-        listViewItemList.add(item);
+    public void addItem(ArrayList<TabListViewModel_0> list){
+        listViewItemList = list;
     }
 }

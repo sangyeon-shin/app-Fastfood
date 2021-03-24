@@ -28,7 +28,7 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
     private FragmentActivity myContext;
-    Fragment fragment0, fragment1, fragment2, fragment3, fragment4, fragment5;
+    Fragment fragment0;
 
     @Override
     public void onAttach(Activity activity) {
@@ -41,58 +41,33 @@ public class HomeFragment extends Fragment {
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        /*final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        }); */
+
 
         //각각의 레이아웃 조각 생성
         fragment0 = new TabFragment_0();
-        fragment1 = new TabFragment_1();
-        fragment2 = new TabFragment_2();
-        fragment3 = new TabFragment_3();
-        fragment4 = new TabFragment_4();
-        fragment5 = new TabFragment_5();
-
-        TabLayout tabs = (TabLayout) root.findViewById(R.id.tabLayout); // TabLayout 뷰를 가져온다.
         myContext.getSupportFragmentManager().beginTransaction().replace(R.id.frame, fragment0).commit();
-
-        // 탭 레이아웃을 추가합니다.탭 선택이 변경될 때 호출되는 탭 선택 수신기입니다.
+        // 탭 레이아웃을 추가합니다.
+        TabLayout tabs = (TabLayout) root.findViewById(R.id.tabLayout); // TabLayout 뷰를 가져온다.
+        // 탭 선택이 변경될 때 호출되는 탭 선택 수신기입니다.
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 
                 int position = tab.getPosition();
-                String classification = null;
 
                 Fragment selected = null;
                 if(position == 0){
                     selected = fragment0;
-                    classification = "hamburger";
-                    //list.execute(classification).get();
                 }else if (position == 1){
-                    selected = fragment1;
-                    classification = "chicken";
-                    //list.execute(classification).get();
+                    selected = new TabFragment_1();
                 }else if (position == 2){
-                    selected = fragment2;
-                    classification = "pizza";
-                    //list.execute(classification).get();
+                    selected = new TabFragment_2();
                 }else if (position == 3){
-                    selected = fragment3;
-                    classification = "snack";
-                    //list.execute(classification).get();
+                    selected = new TabFragment_3();
                 }else if (position == 4){
-                    selected = fragment4;
-                    classification = "cafe";
-                    //list.execute(classification).get();
+                    selected = new TabFragment_4();
                 }else if (position == 5){
-                    selected = fragment5;
-                    classification = "etc";
-                    //list.execute(classification).get();
+                    selected = new TabFragment_5();
                 }
 
                 myContext.getSupportFragmentManager().beginTransaction().replace(R.id.frame, selected).commit();
