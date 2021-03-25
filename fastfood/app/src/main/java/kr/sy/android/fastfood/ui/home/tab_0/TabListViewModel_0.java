@@ -1,5 +1,7 @@
 package kr.sy.android.fastfood.ui.home.tab_0;
 
+import androidx.lifecycle.ViewModel;
+
 import java.util.Date;
 
 public class TabListViewModel_0 {

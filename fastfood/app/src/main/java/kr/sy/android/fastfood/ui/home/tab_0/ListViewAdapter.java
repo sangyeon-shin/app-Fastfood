@@ -19,7 +19,11 @@ public class ListViewAdapter extends BaseAdapter {
     public ArrayList<TabListViewModel_0> listViewItemList = new ArrayList<TabListViewModel_0>();
 
     public ListViewAdapter() {
+        super();
+    }
 
+    public ListViewAdapter(ArrayList<TabListViewModel_0> listViewItemList) {
+        this.listViewItemList = listViewItemList;
     }
 
     // Adapter에 사용되는 데이터의 개수를 리턴, : 필수 구현
