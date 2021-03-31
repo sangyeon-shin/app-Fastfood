@@ -19,20 +19,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar); // activity_main안에 있는 속성들을 id값으로 식별해서 view를 찾아줌
-        setSupportActionBar(toolbar); // 찾아온 view를 ActionBar로 설정
-        ActionBar actionBar = getSupportActionBar(); // 액션바를 가져온다
+        Toolbar toolbar = findViewById(R.id.toolbar); // 뷰를 찾아온다.
+        setSupportActionBar(toolbar); // 찾아온 뷰를 ActionBar로 설정
+        ActionBar actionBar = getSupportActionBar(); // (설정하려고)액션바를 가져온다.
         actionBar.setDisplayShowCustomEnabled(true); // 액션바 커스텀 가능하게 해준다.
-        actionBar.setDisplayShowTitleEnabled(false); // 기본 제목을 없애줍니다.
+        actionBar.setDisplayShowTitleEnabled(false); // 기본 제목을 없앤다.
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        BottomNavigationView navView = findViewById(R.id.nav_view); //뷰를 찾아온다.
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_dashboard1, R.id.navigation_dashboard2, R.id.navigation_dashboard3, R.id.navigation_dashboard4)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(navView, navController);
+                .build(); //앱바 환경설정해서 만든다.
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment); // 메인 화면에서 컨트롤러와 연관된 뷰를 찾아온다.
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration); //액티비티에 컨트롤러와 환경설정을 주입.
+        NavigationUI.setupWithNavController(navView, navController); //네비뷰에 컨트롤러와 환경설정을 주입.
 
     }
 

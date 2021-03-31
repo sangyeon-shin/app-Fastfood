@@ -1,63 +1,42 @@
 package kr.sy.android.fastfood;
 
+import java.util.List;
 
-import android.os.StrictMode;
+import kr.sy.android.fastfood.ui.home.TabListViewModel;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+public class Database {
 
+    static List<TabListViewModel> list = null;
 
-public class DataBase {
+    public List<TabListViewModel> getList(int category_num){
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://13.58.187.197:8080").addConverterFactory(GsonConverterFactory.create()).build();
 
-    private static final String DEFAULT_DRIVER = "oracle.jdbc.driver.OracleDriver";
-    private static final String DEFAULT_URL = "jdbc:oracle:thin:@192.168.1.189:1521:xe";
-    private static final String DEFAULT_USERNAME = "sangyeon";
-    private static final String DEFAULT_PASSWORD = "0129";
+        DBService service = retrofit.create(DBService.class);
 
-    private Connection connection;
+        Call<List<TabListViewModel>> call = service.getCominfo(category_num);
 
-    public DataBase() {
-        /*
-        if (android.os.Build.VERSION.SDK_INT > 9) {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }
-
-         */
-    }
-
-    public String loadList(String category) {
-        String sql = "select * from ";
-        sql = sql + category;
-        String result = null;
-
-        try {
-            this.connection = createConnection();
-            Statement stmt=connection.createStatement();
-            StringBuffer stringBuffer = new StringBuffer();
-            ResultSet rs = stmt.executeQuery("sql");
-            while(rs.next()) {
-                stringBuffer.append( rs.getString(1)+"\n");
+        call.enqueue(new Callback<List<TabListViewModel>>() {
+            @Override
+            public void onResponse(Call<List<TabListViewModel>> call, Response<List<TabListViewModel>> response) {
+                response.errorBody();
+                if (response.isSuccessful()){
+                    list = response.body();
+                    System.out.println(list);
+                }
             }
-            result = stringBuffer.toString();
-            connection.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
 
-    public static Connection createConnection(String driver, String url, String username, String password) throws ClassNotFoundException, SQLException {
+            @Override
+            public void onFailure(Call<List<TabListViewModel>> call, Throwable t) {
+                System.out.println("호출 실패");
+                System.out.println(t.getMessage());
+            }
+        });
 
-        Class.forName(driver);
-        return DriverManager.getConnection(url, username, password);
-    }
-
-    public static Connection createConnection() throws ClassNotFoundException, SQLException {
-        return createConnection(DEFAULT_DRIVER, DEFAULT_URL, DEFAULT_USERNAME, DEFAULT_PASSWORD);
+        return list;
     }
 }

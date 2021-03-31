@@ -1,20 +1,38 @@
-package kr.sy.android.fastfood.ui.home.tab_0;
+package kr.sy.android.fastfood.ui.home;
 
 import androidx.lifecycle.ViewModel;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
-public class TabListViewModel_0 {
+public class TabListViewModel {
 
+    @SerializedName("company_index")
     private int company_index;
+
+    @SerializedName("company_name")
     private String company_name;
+
+    @SerializedName("description")
     private String description;
+
+    @SerializedName("image")
     private String image;
+
+    @SerializedName("category_index")
     private int category_index;
+    /*
+    //@SerializedName("detail_image")
     private String detail_image;
+    //@SerializedName("begin_date")
     private Date begin_date;
+    //@SerializedName("end_date")
     private Date end_date;
+    //@SerializedName("event_title")
     private String event_title;
+
+     */
 
     public int getCompany_index() {
         return company_index;
@@ -55,7 +73,7 @@ public class TabListViewModel_0 {
     public void setCategory_index(int category_index) {
         this.category_index = category_index;
     }
-
+    /*
     public String getDetail_image() {
         return detail_image;
     }
@@ -86,5 +104,18 @@ public class TabListViewModel_0 {
 
     public void setEvent_title(String event_title) {
         this.event_title = event_title;
+    }
+
+     */
+
+    @Override
+    public String toString() {
+        return "TabListViewModel{" +
+                "company_index=" + company_index +
+                ", company_name='" + company_name + '\'' +
+                ", description='" + description + '\'' +
+                ", image='" + image + '\'' +
+                ", category_index=" + category_index +
+                '}';
     }
 }
