@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.tab_0.TabFragment_0">
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listView0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    </ListView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

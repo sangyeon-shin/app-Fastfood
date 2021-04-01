@@ -1,19 +1,42 @@
 package kr.sy.android.fastfood;
 
-import java.util.List;
 
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.schedulers.Schedulers;
 import kr.sy.android.fastfood.ui.home.TabListViewModel;
+import okhttp3.ConnectionPool;
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Database {
 
-    static List<TabListViewModel> list = null;
+    public static List<TabListViewModel> list = null;
 
-    public List<TabListViewModel> getList(int category_num){
+    DBService service = createRetrofit("http://13.58.187.197:8080").create(DBService.class);
+
+    Single<List<TabListViewModel>> getFollowers = service.getCompanyinfo(1).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+
+    private Retrofit createRetrofit(String baseUrl){
+        return new Retrofit.Builder()
+                .client(new OkHttpClient.Builder()
+                        .connectionPool(new ConnectionPool(5, 20, TimeUnit.SECONDS))
+                        .build())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(baseUrl)
+                .build();
+    }
+
+    public void getList(int category_num){
         Retrofit retrofit = new Retrofit.Builder().baseUrl("http://13.58.187.197:8080").addConverterFactory(GsonConverterFactory.create()).build();
 
         DBService service = retrofit.create(DBService.class);
@@ -27,6 +50,7 @@ public class Database {
                 if (response.isSuccessful()){
                     list = response.body();
                     System.out.println(list);
+
                 }
             }
 
@@ -37,6 +61,6 @@ public class Database {
             }
         });
 
-        return list;
     }
+
 }

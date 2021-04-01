@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import kr.sy.android.fastfood.R;
 
@@ -42,8 +43,13 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
         holder.setItem(item);
     }
 
-    public void addItem(TabListViewModel item){
-        items.add(item);
+    public void addItem(List<TabListViewModel> item){
+        if(!item.isEmpty()){
+            for(TabListViewModel model : item){
+                System.out.println(model);
+                items.add(model);
+            }
+        }
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment {
 
                 Fragment selected = null;
                 if(position == 0){
-                    selected = fragment0;
+                    selected = new TabFragment_0();
                 }else if (position == 1){
                     selected = new TabFragment_1();
                 }else if (position == 2){
