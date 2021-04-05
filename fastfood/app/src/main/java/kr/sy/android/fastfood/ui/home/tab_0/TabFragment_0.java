@@ -33,6 +33,7 @@ public class TabFragment_0 extends Fragment {
 
     private FragmentActivity myContext;
     List<TabListViewModel> loadedlist = null;
+    Database db = null;
 
     @Override
     public void onAttach(Activity activity) {
@@ -52,8 +53,8 @@ public class TabFragment_0 extends Fragment {
 
         Database db = new Database();
         db.getList(1);
-        System.out.println(db.list);
         if(db.list != null) {
+            System.out.println(db.list);
             CustomerAdapter adapter = new CustomerAdapter(myContext);
             adapter.addItem(db.list);
             recyclerView.setAdapter(adapter);
