@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/frame"
+        app:layout_constraintBottom_toTopOf="@id/recyclerView"
         app:tabContentStart="0dp"
         app:tabIndicatorColor="#FFFFFF"
         app:tabMode="scrollable">
@@ -51,15 +51,16 @@
 
     </com.google.android.material.tabs.TabLayout>
 
-    <fragment
-        android:id="@+id/frame"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        class="kr.sy.android.fastfood.ui.home.tab_0.TabFragment_0"
         app:layout_constraintTop_toBottomOf="@id/tabLayout"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
 
 
 
