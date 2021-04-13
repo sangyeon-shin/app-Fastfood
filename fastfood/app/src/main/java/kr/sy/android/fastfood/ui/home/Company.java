@@ -6,10 +6,10 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 
-public class TabListViewModel {
+public class Company {
 
 
-    public TabListViewModel(int company_index, String company_name, String description, String image, int category_index) {
+    public Company(int company_index, String company_name, String description, String image, int category_index) {
         this.company_index = company_index;
         this.company_name = company_name;
         this.description = description;
@@ -119,7 +119,7 @@ public class TabListViewModel {
 
     @Override
     public String toString() {
-        return "TabListViewModel{" +
+        return "Company{" +
                 "company_index=" + company_index +
                 ", company_name='" + company_name + '\'' +
                 ", description='" + description + '\'' +
