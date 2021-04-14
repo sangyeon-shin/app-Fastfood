@@ -15,7 +15,7 @@ import kr.sy.android.fastfood.RetrofitService;
 
 public class HomeViewModel extends ViewModel {
 
-    private CompanyService companyService;
+    private final CompanyService companyService;
     private MutableLiveData<Company> companyLiveData;
 
     private Disposable disposable = null;
@@ -32,6 +32,7 @@ public class HomeViewModel extends ViewModel {
     public LiveData<Company> getCompanyLiveData() {
         return this.companyLiveData;
     }
+
 
     public HomeViewModel(CompanyService service) {
         this.companyService = service;
@@ -60,10 +61,9 @@ public class HomeViewModel extends ViewModel {
 //---------------------------------------------------------------------------------------------------------------
 
 class CompanyService {
-    private DBService dbService;
+    private DBService dbService = RetrofitService.getService();
 
-    public CompanyService(DBService dbService) {
-        this.dbService = RetrofitService.getService();
+    public CompanyService() {
     }
 
     public Single<List<Company>> fetchCompany(int categoryIndex) {

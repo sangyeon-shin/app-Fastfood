@@ -16,22 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabLayout;
 
-import java.util.List;
-
-import io.reactivex.Single;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.Nullable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-import kr.sy.android.fastfood.DBService;
 import kr.sy.android.fastfood.R;
-import kr.sy.android.fastfood.RetrofitService;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
     private FragmentActivity myContext;
-    static List<Company> loadedlist = null; //라이브 데이터에 넣어야함
+    private CompanyService cService = new CompanyService();
 
     @Override
     public void onAttach(Activity activity) {
@@ -41,8 +32,7 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        homeViewModel = new ViewModelProvider(this, new HomeViewModelFactory(cService)).get(HomeViewModel.class);
         //뷰 생성
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
@@ -58,9 +48,9 @@ public class HomeFragment extends Fragment {
             }
         };
 
-        // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
-        homeViewModel.loadCompany(1);
-        homeViewModel.getCompanyLiveData().observe(this.getViewLifecycleOwner(),companyObserver);
+        if(homeViewModel.getCompanyLiveData() != null){
+            homeViewModel.getCompanyLiveData().observe(this.getViewLifecycleOwner(),companyObserver);
+        }
 
         // TabLayout 뷰를 가져온다.
         TabLayout tabs = (TabLayout) root.findViewById(R.id.tabLayout);
@@ -72,17 +62,17 @@ public class HomeFragment extends Fragment {
                 int position = tab.getPosition();
                 
                 if(position == 0){
-                    //updateList(1,recyclerView);
+                    homeViewModel.loadCompany(1);
                 }else if (position == 1){
-                    //updateList(2,recyclerView);
+                    homeViewModel.loadCompany(2);
                 }else if (position == 2){
-                    //updateList(3,recyclerView);
+                    homeViewModel.loadCompany(3);
                 }else if (position == 3){
-                    //updateList(4,recyclerView);
+                    homeViewModel.loadCompany(4);
                 }else if (position == 4){
-                    //updateList(5,recyclerView);
+                    homeViewModel.loadCompany(5);
                 }else if (position == 5){
-                    //updateList(6,recyclerView);
+                    homeViewModel.loadCompany(6);
                 }
 
             }
