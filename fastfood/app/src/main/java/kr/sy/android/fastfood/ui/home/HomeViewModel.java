@@ -1,23 +1,20 @@
 package kr.sy.android.fastfood.ui.home;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
-import io.reactivex.Scheduler;
-import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-import kr.sy.android.fastfood.DBService;
-import kr.sy.android.fastfood.RetrofitService;
+import kr.sy.android.fastfood.ui.CompanyService;
 
 public class HomeViewModel extends ViewModel {
 
-    private final CompanyService companyService;
-    private MutableLiveData<Company> companyLiveData;
-
+    private CompanyService companyService;
+    private MutableLiveData<List<Company>> companyLiveData = new MutableLiveData();
     private Disposable disposable = null;
 
 
@@ -29,13 +26,14 @@ public class HomeViewModel extends ViewModel {
             disposable.dispose();
     }
 
-    public LiveData<Company> getCompanyLiveData() {
+    public LiveData<List<Company>> getCompanyLiveData() {
         return this.companyLiveData;
     }
 
 
     public HomeViewModel(CompanyService service) {
         this.companyService = service;
+        loadCompany(1);
     }
 
     // observeOn이 필요없는 이유는 LiveData.postValue는 백그라운드 쓰레드에서도 값을 전달할 수 있기 때문입니다.
@@ -51,27 +49,8 @@ public class HomeViewModel extends ViewModel {
 
 
     private void updateCompany(List<Company> companyList) {
-        for(Company company : companyList){
-            companyLiveData.postValue(company);
-        }
+        companyLiveData.postValue(companyList);
     }
 
 }
 
-//---------------------------------------------------------------------------------------------------------------
-
-class CompanyService {
-    private DBService dbService = RetrofitService.getService();
-
-    public CompanyService() {
-    }
-
-    public Single<List<Company>> fetchCompany(int categoryIndex) {
-        // observeOn이 필요없는 이유는 LiveData.postValue는 백그라운드 쓰레드에서도 값을 전달할 수 있기 때문입니다.
-        // liveData.value 를 사용하신다면 메인쓰레드로 전환해야 겠죠.
-        return dbService.getCompanyinfo(categoryIndex)
-                .subscribeOn(Schedulers.io());
-    }
-
-
-}

@@ -2,9 +2,11 @@ package kr.sy.android.fastfood.ui.home;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,51 +18,46 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.List;
+
 import kr.sy.android.fastfood.R;
+import kr.sy.android.fastfood.ui.CompanyService;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
-    private FragmentActivity myContext;
     private CompanyService cService = new CompanyService();
-
-    @Override
-    public void onAttach(Activity activity) {
-        myContext=(FragmentActivity) activity;
-        super.onAttach(activity);
-    }
+    private TabLayout tabLayout;
+    private RecyclerView recyclerView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = new ViewModelProvider(this, new HomeViewModelFactory(cService)).get(HomeViewModel.class);
+        homeViewModel.getCompanyLiveData().observe(this.getViewLifecycleOwner(),companyObserver());
         //뷰 생성
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
-        RecyclerView recyclerView = (RecyclerView)root.findViewById(R.id.recyclerView);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(myContext, LinearLayoutManager.VERTICAL, false);
+        // TabLayout 뷰를 가져온다.
+        tabLayout = (TabLayout) root.findViewById(R.id.tabLayout);
+        addOnTabSelectedListener(tabLayout);
+        // 탭 선택이 변경될 때 호출되는 탭 선택 수신기입니다.
+
+        recyclerView = (RecyclerView)root.findViewById(R.id.recyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
-        // ViewModel 에서 변경된 데이터가 있는지 observing
-        final Observer<Company> companyObserver = new Observer<Company>() {
-            @Override
-            public void onChanged(Company company) {
-                recyclerView.setAdapter(updateRecyclerView(company));
-            }
-        };
 
-        if(homeViewModel.getCompanyLiveData() != null){
-            homeViewModel.getCompanyLiveData().observe(this.getViewLifecycleOwner(),companyObserver);
-        }
 
-        // TabLayout 뷰를 가져온다.
-        TabLayout tabs = (TabLayout) root.findViewById(R.id.tabLayout);
-        // 탭 선택이 변경될 때 호출되는 탭 선택 수신기입니다.
-        tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        return root;
+    }
+
+    private void addOnTabSelectedListener(TabLayout tabLayout){
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 
                 int position = tab.getPosition();
-                
+
                 if(position == 0){
                     homeViewModel.loadCompany(1);
                 }else if (position == 1){
@@ -87,14 +84,40 @@ public class HomeFragment extends Fragment {
 
             }
         });
-
-        return root;
     }
 
-    private CustomerAdapter updateRecyclerView(Company company){
+    private Observer<List<Company>> companyObserver(){
+        final Observer<List<Company>> companyObserver = new Observer<List<Company>>() {
+            @Override
+            public void onChanged(List<Company> companyList) {
+                recyclerView.setAdapter(updateRecyclerView(companyList));
+            }
+        };
+        return companyObserver;
+    }
+
+    private CustomerAdapter updateRecyclerView(List<Company> companyList){
         //여기서 리사이클러뷰 갱신
-        CustomerAdapter adapter = new CustomerAdapter(myContext);
-        adapter.addItem(company);
+        CustomerAdapter adapter = new CustomerAdapter(this.getActivity());
+
+        for(Company company : companyList) {
+            adapter.addItem(company);
+        }
+
+        createClickListener(adapter);
+
+        return adapter;
+    }
+
+    private CustomerAdapter createClickListener(CustomerAdapter adapter){
+        adapter.setOnItemClicklistener(new onItemClickListener() {
+            @Override
+            public void onItemClick(CustomerAdapter.ViewHolder holder, View view, int position) {
+                Company item = adapter.getItem(position);
+                Toast.makeText(getActivity().getApplicationContext(),"아이템 선택 " + item.getCompany_name(), Toast.LENGTH_LONG).show();
+            }
+        });
+
         return adapter;
     }
 

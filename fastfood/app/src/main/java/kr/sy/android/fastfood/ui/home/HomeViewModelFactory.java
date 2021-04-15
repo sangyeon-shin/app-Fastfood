@@ -4,10 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import java.lang.reflect.InvocationTargetException;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
+
+import kr.sy.android.fastfood.ui.CompanyService;
 
 
 public class HomeViewModelFactory implements ViewModelProvider.Factory {
