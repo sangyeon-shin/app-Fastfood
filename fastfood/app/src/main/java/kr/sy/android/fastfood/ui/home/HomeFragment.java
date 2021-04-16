@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,7 +22,9 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.List;
 
 import kr.sy.android.fastfood.R;
+import kr.sy.android.fastfood.ui.CompanyDetailDialog;
 import kr.sy.android.fastfood.ui.CompanyService;
+import kr.sy.android.fastfood.ui.CustomDialogClickListener;
 
 public class HomeFragment extends Fragment {
 
@@ -113,12 +116,33 @@ public class HomeFragment extends Fragment {
         adapter.setOnItemClicklistener(new onItemClickListener() {
             @Override
             public void onItemClick(CustomerAdapter.ViewHolder holder, View view, int position) {
-                Company item = adapter.getItem(position);
-                Toast.makeText(getActivity().getApplicationContext(),"아이템 선택 " + item.getCompany_name(), Toast.LENGTH_LONG).show();
+                Company company = adapter.getItem(position);
+                Toast.makeText(getActivity().getApplicationContext(),"아이템 선택 " + company.getCompany_name(), Toast.LENGTH_LONG).show();
+                dialogButtonListener(company);
             }
         });
 
         return adapter;
+    }
+
+    private CompanyDetailDialog dialogButtonListener(Company company){
+        CompanyDetailDialog dialog = new CompanyDetailDialog(getContext(), company, new CustomDialogClickListener() {
+            @Override
+            public void onPositiveClick() {
+                Log.d("Test","OK click");
+            }
+
+            @Override
+            public void onNegativeClick() {
+                Log.d("Test", "Cancel click");
+            }
+        });
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.setCancelable(true);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.MATCH_PARENT);
+        dialog.show();
+
+        return dialog;
     }
 
 }

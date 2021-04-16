@@ -12,12 +12,11 @@
         android:paddingRight="30sp"
         android:orientation="vertical">
         <ImageView
-            android:id="@+id/listViewLogo"
+            android:id="@+id/recyclerviewCompanyImage"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:gravity="center"
-            android:layout_weight="1.5"
-            android:src="@drawable/ic_baseline_fastfood_24"/>
+            android:layout_weight="1.5"/>
 
     </LinearLayout>
 
@@ -28,7 +27,7 @@
         android:layout_weight="4">
 
         <TextView
-            android:id="@+id/listViewCompanyName"
+            android:id="@+id/recyclerviewCompanyName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="name"
