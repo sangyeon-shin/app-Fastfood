@@ -1,6 +1,4 @@
-package kr.sy.android.fastfood.ui.home;
-
-import android.util.Log;
+package kr.sy.android.fastfood.viewmodel;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -9,11 +7,12 @@ import androidx.lifecycle.ViewModel;
 import java.util.List;
 
 import io.reactivex.disposables.Disposable;
-import kr.sy.android.fastfood.ui.CompanyService;
+import kr.sy.android.fastfood.component.CompanyServiceImpl;
+import kr.sy.android.fastfood.model.Company;
 
 public class HomeViewModel extends ViewModel {
 
-    private CompanyService companyService;
+    private CompanyServiceImpl companyServiceImpl;
     private MutableLiveData<List<Company>> companyLiveData = new MutableLiveData();
     private Disposable disposable = null;
 
@@ -31,16 +30,16 @@ public class HomeViewModel extends ViewModel {
     }
 
 
-    public HomeViewModel(CompanyService service) {
-        this.companyService = service;
+    public HomeViewModel(CompanyServiceImpl service) {
+        this.companyServiceImpl = service;
         loadCompany(1);
     }
 
     // observeOn이 필요없는 이유는 LiveData.postValue는 백그라운드 쓰레드에서도 값을 전달할 수 있기 때문입니다.
     // liveData.value 를 사용하신다면 메인쓰레드로 전환해야 겠죠.
     public void loadCompany(int categoryIndex){
-        disposable = companyService
-                .fetchCompany(categoryIndex)
+        disposable = companyServiceImpl
+                .fetchCompanyList(categoryIndex)
                 .subscribe(
                         v -> updateCompany(v) ,
                         err -> System.err.println("onError() : err :" + err.getMessage()));

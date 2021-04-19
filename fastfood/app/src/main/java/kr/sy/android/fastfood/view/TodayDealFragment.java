@@ -1,28 +1,26 @@
-package kr.sy.android.fastfood.ui.dashboard1;
+package kr.sy.android.fastfood.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import kr.sy.android.fastfood.R;
+import kr.sy.android.fastfood.viewmodel.TodayDealViewModel;
 
-public class DashboardFragment1 extends Fragment {
+public class TodayDealFragment extends Fragment {
 
-    private kr.sy.android.fastfood.ui.dashboard1.DashboardViewModel1 dashboardViewModel;
+    private TodayDealViewModel dashboardViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel1.class);
+                new ViewModelProvider(this).get(TodayDealViewModel.class);
         onStop();
         View root = inflater.inflate(R.layout.fragment_dashboard1, container, false);
 

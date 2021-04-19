@@ -1,14 +1,13 @@
-package kr.sy.android.fastfood.ui.dashboard3;
+package kr.sy.android.fastfood.viewmodel;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class DashboardViewModel3 extends ViewModel {
+public class HotDealViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public DashboardViewModel3() {
+    public HotDealViewModel() {
         //mText = new MutableLiveData<>();
         //mText.setValue("This is dashboard fragment");
     }

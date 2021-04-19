@@ -1,14 +1,13 @@
-package kr.sy.android.fastfood.ui.dashboard4;
+package kr.sy.android.fastfood.viewmodel;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class DashboardViewModel4 extends ViewModel {
+public class BoardViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public DashboardViewModel4() {
+    public BoardViewModel() {
         //mText = new MutableLiveData<>();
         //mText.setValue("This is dashboard fragment");
     }

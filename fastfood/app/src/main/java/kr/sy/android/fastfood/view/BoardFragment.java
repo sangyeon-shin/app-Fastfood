@@ -1,28 +1,26 @@
-package kr.sy.android.fastfood.ui.dashboard3;
+package kr.sy.android.fastfood.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import kr.sy.android.fastfood.R;
+import kr.sy.android.fastfood.viewmodel.BoardViewModel;
 
-public class DashboardFragment3 extends Fragment {
+public class BoardFragment extends Fragment {
 
-    private DashboardViewModel3 dashboardViewModel;
+    private BoardViewModel dashboardViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel3.class);
+                new ViewModelProvider(this).get(BoardViewModel.class);
         onStop();
         View root = inflater.inflate(R.layout.fragment_dashboard3, container, false);
         /*final TextView textView = root.findViewById(R.id.text_dashboard);

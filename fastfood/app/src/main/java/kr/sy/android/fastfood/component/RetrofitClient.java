@@ -1,19 +1,19 @@
-package kr.sy.android.fastfood;
+package kr.sy.android.fastfood.component;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetrofitService {
+public class RetrofitClient {
 
-    private RetrofitService(){}
+    private RetrofitClient(){}
 
-    private static class RetrofitServiceHolder{
+    private static class RetrofitClientHolder{
         public static final Retrofit INSTANCE = new Retrofit.Builder().addCallAdapterFactory(RxJava2CallAdapterFactory.create()).addConverterFactory(GsonConverterFactory.create()).baseUrl("http://13.58.187.197:8080").build();
     }
 
     public static Retrofit getInstance(){
-        return RetrofitServiceHolder.INSTANCE;
+        return RetrofitClientHolder.INSTANCE;
     }
 
     private static class DBServiceHolder{

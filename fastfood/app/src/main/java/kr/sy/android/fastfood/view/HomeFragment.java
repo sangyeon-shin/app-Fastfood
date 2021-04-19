@@ -1,6 +1,5 @@
-package kr.sy.android.fastfood.ui.home;
+package kr.sy.android.fastfood.view;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,7 +10,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,15 +20,20 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.List;
 
 import kr.sy.android.fastfood.R;
-import kr.sy.android.fastfood.ui.CompanyDetailDialog;
-import kr.sy.android.fastfood.ui.CompanyService;
-import kr.sy.android.fastfood.ui.CustomDialogClickListener;
+import kr.sy.android.fastfood.injection.HomeViewModelFactory;
+import kr.sy.android.fastfood.model.Company;
+import kr.sy.android.fastfood.component.CompanyServiceImpl;
+import kr.sy.android.fastfood.view.action.CustomDialogClickListener;
+import kr.sy.android.fastfood.view.action.OnItemClickListener;
+import kr.sy.android.fastfood.view.adapter.CustomerAdapter;
+import kr.sy.android.fastfood.view.dialog.CompanyDetailDialog;
+import kr.sy.android.fastfood.viewmodel.HomeViewModel;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
-    private CompanyService cService = new CompanyService();
-    private TabLayout tabLayout;
+    private CompanyServiceImpl cService = new CompanyServiceImpl();
+    //private TabLayout tabLayout;
     private RecyclerView recyclerView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -41,7 +44,7 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         // TabLayout 뷰를 가져온다.
-        tabLayout = (TabLayout) root.findViewById(R.id.tabLayout);
+        TabLayout tabLayout = (TabLayout) root.findViewById(R.id.tabLayout);
         addOnTabSelectedListener(tabLayout);
         // 탭 선택이 변경될 때 호출되는 탭 선택 수신기입니다.
 
@@ -113,7 +116,7 @@ public class HomeFragment extends Fragment {
     }
 
     private CustomerAdapter createClickListener(CustomerAdapter adapter){
-        adapter.setOnItemClicklistener(new onItemClickListener() {
+        adapter.setOnItemClicklistener(new OnItemClickListener() {
             @Override
             public void onItemClick(CustomerAdapter.ViewHolder holder, View view, int position) {
                 Company company = adapter.getItem(position);

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.dashboard3.DashboardFragment3">
+    tools:context=".view.BoardFragment">
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

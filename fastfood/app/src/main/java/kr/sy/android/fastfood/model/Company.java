@@ -1,10 +1,6 @@
-package kr.sy.android.fastfood.ui.home;
-
-import androidx.lifecycle.ViewModel;
+package kr.sy.android.fastfood.model;
 
 import com.google.gson.annotations.SerializedName;
-
-import java.util.Date;
 
 public class Company {
 

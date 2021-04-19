@@ -1,4 +1,4 @@
-package kr.sy.android.fastfood.ui.home;
+package kr.sy.android.fastfood.injection;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
@@ -7,14 +7,15 @@ import androidx.lifecycle.ViewModelProvider;
 
 import javax.inject.Inject;
 
-import kr.sy.android.fastfood.ui.CompanyService;
+import kr.sy.android.fastfood.component.CompanyServiceImpl;
+import kr.sy.android.fastfood.viewmodel.HomeViewModel;
 
 
 public class HomeViewModelFactory implements ViewModelProvider.Factory {
-    private final CompanyService mService;
+    private final CompanyServiceImpl mService;
 
     @Inject
-    public HomeViewModelFactory(CompanyService service) {
+    public HomeViewModelFactory(CompanyServiceImpl service) {
         mService = service;
     }
 

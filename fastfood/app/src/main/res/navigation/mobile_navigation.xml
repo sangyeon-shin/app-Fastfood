@@ -7,31 +7,31 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="kr.sy.android.fastfood.ui.home.HomeFragment"
+        android:name="kr.sy.android.fastfood.view.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard1"
-        android:name="kr.sy.android.fastfood.ui.dashboard1.DashboardFragment1"
+        android:name="kr.sy.android.fastfood.view.TodayDealFragment"
         android:label="@string/title_dashboard1"
         tools:layout="@layout/fragment_dashboard1" />
 
     <fragment
         android:id="@+id/navigation_dashboard2"
-        android:name="kr.sy.android.fastfood.ui.dashboard2.DashboardFragment2"
+        android:name="kr.sy.android.fastfood.view.HotDealFragment"
         android:label="@string/title_dashboard2"
         tools:layout="@layout/fragment_dashboard2" />
 
     <fragment
         android:id="@+id/navigation_dashboard3"
-        android:name="kr.sy.android.fastfood.ui.dashboard3.DashboardFragment3"
+        android:name="kr.sy.android.fastfood.view.BoardFragment"
         android:label="@string/title_dashboard3"
         tools:layout="@layout/fragment_dashboard3" />
 
     <fragment
         android:id="@+id/navigation_dashboard4"
-        android:name="kr.sy.android.fastfood.ui.dashboard4.DashboardFragment4"
+        android:name="kr.sy.android.fastfood.view.ConfigurationSettingsFragment"
         android:label="@string/title_dashboard4"
         tools:layout="@layout/fragment_dashboard4" />
 </navigation>

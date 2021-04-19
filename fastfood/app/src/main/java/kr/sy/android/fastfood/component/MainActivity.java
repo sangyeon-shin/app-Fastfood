@@ -1,4 +1,4 @@
-package kr.sy.android.fastfood;
+package kr.sy.android.fastfood.component;
 
 import android.os.Bundle;
 
@@ -11,6 +11,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import kr.sy.android.fastfood.R;
 
 public class MainActivity extends AppCompatActivity {
 

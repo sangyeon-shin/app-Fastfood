@@ -1,4 +1,4 @@
-package kr.sy.android.fastfood.ui;
+package kr.sy.android.fastfood.view.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -9,16 +9,16 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.bumptech.glide.Glide;
+
 import kr.sy.android.fastfood.R;
-import kr.sy.android.fastfood.ui.home.Company;
+import kr.sy.android.fastfood.model.Company;
+import kr.sy.android.fastfood.view.action.CustomDialogClickListener;
 
 public class CompanyDetailDialog extends Dialog {
 
     private Context context;
     private CustomDialogClickListener customDialogClickListener;
-    private ImageView companyImage , detailImage;
-    private TextView companyName;
-    private ImageButton backButton, searchButton;
     private Company company;
 
     public CompanyDetailDialog(@NonNull Context context, Company company, CustomDialogClickListener customDialogClickListener) {
@@ -33,27 +33,44 @@ public class CompanyDetailDialog extends Dialog {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.customized_dialog);
         setCompanyName(this.company);
-        backButton = findViewById(R.id.backButton);
-        searchButton = findViewById(R.id.searchButton);
+        setCompanyImage(this.company);
+        //setDetailImage(this.company);
+        ImageButton backButton = findViewById(R.id.backButton);
+        ImageButton searchButton = findViewById(R.id.searchButton);
 
+        setBackButtonOnClickListener(backButton);
+        setSearchButtonOnClickListener(searchButton);
+
+    }
+
+    private void setBackButtonOnClickListener(ImageButton backButton){
         backButton.setOnClickListener(v -> {
             this.customDialogClickListener.onNegativeClick();
             dismiss();
         });
+    }
+
+    private void setSearchButtonOnClickListener(ImageButton searchButton){
         searchButton.setOnClickListener(v -> {
             this.customDialogClickListener.onPositiveClick();
             dismiss();
         });
-
     }
 
     private void setCompanyName(Company company){
-        companyName = findViewById(R.id.companyName);
+        TextView companyName = findViewById(R.id.companyName);
         companyName.setText(company.getCompany_name());
     }
-
+    private void setCompanyImage(Company company){
+        ImageView companyImage = findViewById(R.id.companyImage);
+        Glide.with(context).load(company.getImage()).into(companyImage);
+    }
     private void setDetailImage(Company company){
-        detailImage = findViewById(R.id.detailImage);
-        //detailImage.setImage
+        ImageView detailImage = findViewById(R.id.detailImage);
+        //Glide.with(context).load(company.getDetailImage()).into(detailImage);
+    }
+    private String CrawlingImage(Company company){
+
+        return null;
     }
 }

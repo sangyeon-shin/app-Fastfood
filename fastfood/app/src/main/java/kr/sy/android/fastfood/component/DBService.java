@@ -1,11 +1,11 @@
-package kr.sy.android.fastfood;
+package kr.sy.android.fastfood.component;
 
 
 import java.util.List;
 
 
 import io.reactivex.Single;
-import kr.sy.android.fastfood.ui.home.Company;
+import kr.sy.android.fastfood.model.Company;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -16,7 +16,7 @@ public interface DBService {
     Call<List<Company>> getCominfo(@Query("category_index") int num);
 
     @GET("/load_tablist.jsp")
-    Single<List<Company>> getCompanyinfo(@Query("category_index") int num);
+    Single<List<Company>> getCompanyList(@Query("category_index") int num);
 }
 
 

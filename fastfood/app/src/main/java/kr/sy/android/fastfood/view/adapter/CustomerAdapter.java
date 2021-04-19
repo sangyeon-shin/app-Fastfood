@@ -1,4 +1,4 @@
-package kr.sy.android.fastfood.ui.home;
+package kr.sy.android.fastfood.view.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -15,12 +15,14 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 import kr.sy.android.fastfood.R;
+import kr.sy.android.fastfood.model.Company;
+import kr.sy.android.fastfood.view.action.OnItemClickListener;
 
-public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHolder> implements onItemClickListener{
+public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHolder> implements OnItemClickListener {
 
-    Context context;
-    ArrayList<Company> items = new ArrayList<Company>();
-    onItemClickListener listener;
+    private Context context;
+    private ArrayList<Company> items = new ArrayList<Company>();
+    private OnItemClickListener listener;
 
     public CustomerAdapter(Context context){
         this.context = context;
@@ -54,7 +56,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
         return items.get(position);
     }
 
-    public void setOnItemClicklistener(onItemClickListener listener){ this.listener = listener; }
+    public void setOnItemClicklistener(OnItemClickListener listener){ this.listener = listener; }
 
     @Override
     public void onItemClick(ViewHolder holder, View view, int position) {
@@ -63,11 +65,11 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
         }
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView company_name;
         ImageView company_image;
 
-        public ViewHolder(@NonNull View itemView,onItemClickListener listener) {
+        public ViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
 
             company_name = itemView.findViewById(R.id.recyclerviewCompanyName);
