@@ -34,7 +34,8 @@ public class CompanyDetailDialog extends Dialog {
         setContentView(R.layout.customized_dialog);
         setCompanyName(this.company);
         setCompanyImage(this.company);
-        //setDetailImage(this.company);
+        setEventTitle(this.company);
+        setDetailImage(this.company);
         ImageButton backButton = findViewById(R.id.backButton);
         ImageButton searchButton = findViewById(R.id.searchButton);
 
@@ -65,12 +66,13 @@ public class CompanyDetailDialog extends Dialog {
         ImageView companyImage = findViewById(R.id.companyImage);
         Glide.with(context).load(company.getImage()).into(companyImage);
     }
+    private void setEventTitle(Company company){
+        TextView eventTitle = findViewById(R.id.eventTitle);
+        eventTitle.setText(company.getEvent_title());
+    }
     private void setDetailImage(Company company){
         ImageView detailImage = findViewById(R.id.detailImage);
-        //Glide.with(context).load(company.getDetailImage()).into(detailImage);
+        Glide.with(context).load(company.getDetail_image()).into(detailImage);
     }
-    private String CrawlingImage(Company company){
 
-        return null;
-    }
 }

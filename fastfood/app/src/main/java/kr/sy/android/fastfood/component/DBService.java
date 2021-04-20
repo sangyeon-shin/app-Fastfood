@@ -15,7 +15,7 @@ public interface DBService {
     @GET("/load_tablist.jsp")
     Call<List<Company>> getCominfo(@Query("category_index") int num);
 
-    @GET("/load_tablist.jsp")
+    @GET("/load_company.jsp")
     Single<List<Company>> getCompanyList(@Query("category_index") int num);
 }
 
