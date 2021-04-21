@@ -7,13 +7,13 @@ import androidx.lifecycle.ViewModelProvider;
 import javax.inject.Inject;
 
 import kr.sy.android.fastfood.component.CompanyServiceImpl;
-import kr.sy.android.fastfood.viewmodel.HomeViewModel;
+import kr.sy.android.fastfood.viewmodel.TodayDealViewModel;
 
-public class HomeViewModelFactory implements ViewModelProvider.Factory {
+public class TodayDealViewModelFactory implements ViewModelProvider.Factory {
     private final CompanyServiceImpl mService;
 
     @Inject
-    public HomeViewModelFactory(CompanyServiceImpl service) {
+    public TodayDealViewModelFactory(CompanyServiceImpl service) {
         mService = service;
     }
 
@@ -22,7 +22,6 @@ public class HomeViewModelFactory implements ViewModelProvider.Factory {
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
 
-        return (T) new HomeViewModel(mService);
+        return (T) new TodayDealViewModel(mService);
     }
 }
-

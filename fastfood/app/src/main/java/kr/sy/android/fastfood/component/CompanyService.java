@@ -7,4 +7,5 @@ import kr.sy.android.fastfood.model.Company;
 
 public interface CompanyService {
     public Single<List<Company>> fetchCompanyList(int categoryIndex);
+    public Single<List<Company>> fetchTodayList(String todayDate);
 }

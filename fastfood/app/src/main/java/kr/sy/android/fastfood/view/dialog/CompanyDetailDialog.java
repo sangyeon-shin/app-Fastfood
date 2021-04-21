@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
 
+import java.text.SimpleDateFormat;
+
 import kr.sy.android.fastfood.R;
 import kr.sy.android.fastfood.model.Company;
 import kr.sy.android.fastfood.view.action.CustomDialogClickListener;
@@ -35,6 +37,7 @@ public class CompanyDetailDialog extends Dialog {
         setCompanyName(this.company);
         setCompanyImage(this.company);
         setEventTitle(this.company);
+        setEventDate(this.company);
         setDetailImage(this.company);
         ImageButton backButton = findViewById(R.id.backButton);
         ImageButton searchButton = findViewById(R.id.searchButton);
@@ -69,6 +72,13 @@ public class CompanyDetailDialog extends Dialog {
     private void setEventTitle(Company company){
         TextView eventTitle = findViewById(R.id.eventTitle);
         eventTitle.setText(company.getEvent_title());
+    }
+    private void setEventDate(Company company){
+        TextView eventDate = findViewById(R.id.eventDate);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String date = simpleDateFormat.format(company.getBegin())+ " ~ " + simpleDateFormat.format(company.getEnd());
+        System.out.println(date);
+        eventDate.setText(date);
     }
     private void setDetailImage(Company company){
         ImageView detailImage = findViewById(R.id.detailImage);

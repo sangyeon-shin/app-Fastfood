@@ -12,11 +12,13 @@ import retrofit2.http.Query;
 
 public interface DBService {
 
-    @GET("/load_tablist.jsp")
-    Call<List<Company>> getCominfo(@Query("category_index") int num);
-
     @GET("/load_company.jsp")
     Single<List<Company>> getCompanyList(@Query("category_index") int num);
+
+    @GET("/load_today.jsp")
+    Single<List<Company>> getTodayList(@Query("today_date") String todayDate);
+
+
 }
 
 

@@ -52,8 +52,6 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
-
-
         return root;
     }
 
@@ -120,7 +118,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onItemClick(CustomerAdapter.ViewHolder holder, View view, int position) {
                 Company company = adapter.getItem(position);
-                Toast.makeText(getActivity().getApplicationContext(),"아이템 선택 " + company.getCompany_name(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity().getApplicationContext(),"아이템 선택 " + company.getCompany_name(), Toast.LENGTH_LONG).show();
                 dialogButtonListener(company);
             }
         });

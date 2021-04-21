@@ -19,4 +19,10 @@ public class CompanyServiceImpl implements CompanyService{
         return dbService.getCompanyList(categoryIndex)
                 .subscribeOn(Schedulers.io());
     }
+
+    @Override
+    public Single<List<Company>> fetchTodayList(String todayDate) {
+        return dbService.getTodayList(todayDate)
+                .subscribeOn(Schedulers.io());
+    }
 }
