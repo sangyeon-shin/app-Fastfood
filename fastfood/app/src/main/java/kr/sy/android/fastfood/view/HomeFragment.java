@@ -36,6 +36,12 @@ public class HomeFragment extends Fragment {
     //private TabLayout tabLayout;
     private RecyclerView recyclerView;
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        homeViewModel.onCleared();
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = new ViewModelProvider(this, new HomeViewModelFactory(cService)).get(HomeViewModel.class);

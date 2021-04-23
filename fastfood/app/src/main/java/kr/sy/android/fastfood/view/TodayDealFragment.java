@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -47,13 +48,21 @@ public class TodayDealFragment extends Fragment {
         ((AppCompatActivity)getActivity()).getSupportActionBar().show();
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        todayDealViewModel.onCleared();
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         todayDealViewModel = new ViewModelProvider(this, new TodayDealViewModelFactory(cService)).get(TodayDealViewModel.class);
         todayDealViewModel.getCompanyLiveData().observe(this.getViewLifecycleOwner(),companyObserver());
-        onStop();
+        //onStop();
         View root = inflater.inflate(R.layout.fragment_dashboard1, container, false);
-        setDate(root,todayDealViewModel.getTodaysDate());
+        setDate(root);
+        decreaseDateClickListener(root);
+        increaseDateClickListener(root);
         recyclerView = (RecyclerView)root.findViewById(R.id.todayRecyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
@@ -61,9 +70,34 @@ public class TodayDealFragment extends Fragment {
         return root;
     }
 
-    private void setDate(View root,String todaysDate){
-        date = (TextView)root.findViewById(R.id.date);
-        date.setText(todaysDate);
+    private void setDate(View root){
+        date = root.findViewById(R.id.date);
+        date.setText(todayDealViewModel.getTodaysDate());
+    }
+
+    public void decreaseDateClickListener(View root){
+        ImageButton imageButton = root.findViewById(R.id.decreaseDateButton);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                todayDealViewModel.decreaseDate();
+                setDate(root);
+                todayDealViewModel.loadCompany(todayDealViewModel.getTodaysDate());
+            }
+        });
+    }
+
+    public void increaseDateClickListener(View root){
+        ImageButton imageButton = root.findViewById(R.id.increaseDateButton);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                todayDealViewModel.increaseDate();
+                setDate(root);
+                todayDealViewModel.loadCompany(todayDealViewModel.getTodaysDate());
+            }
+        });
+
     }
 
     private Observer<List<Company>> companyObserver(){
