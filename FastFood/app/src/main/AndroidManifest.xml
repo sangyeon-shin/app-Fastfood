@@ -11,6 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Fastfood">
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-9413760929727391~6561004268"></meta-data>
         <activity
             android:name=".component.MainActivity"
             android:label="@string/app_name">

@@ -2,6 +2,9 @@ package kr.sy.android.fastfood.component;
 
 import android.os.Bundle;
 
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.ActionBar;
@@ -35,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment); // 메인 화면에서 컨트롤러와 연관된 뷰를 찾아온다.
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration); //액티비티에 컨트롤러와 환경설정을 주입.
         NavigationUI.setupWithNavController(navView, navController); //네비뷰에 컨트롤러와 환경설정을 주입.
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() { @Override public void onInitializationComplete(InitializationStatus initializationStatus) { } });
 
     }
 
