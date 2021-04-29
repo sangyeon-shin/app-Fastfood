@@ -45,6 +45,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Company company = items.get(position);
         holder.setItem(company);
+        holder.setDescription(company);
         holder.setCompanyImage(company);
     }
 
@@ -67,12 +68,14 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView company_name;
+        TextView description;
         ImageView company_image;
 
         public ViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
 
             company_name = itemView.findViewById(R.id.recyclerviewCompanyName);
+            description = itemView.findViewById(R.id.description);
             company_image = itemView.findViewById(R.id.recyclerviewCompanyImage);
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -89,9 +92,11 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
         public void setItem(Company company){
             company_name.setText(company.getCompany_name());
         }
+        public void setDescription(Company company){description.setText(company.getEvent_title());}
         public void setCompanyImage(Company company){
             Glide.with(itemView).load(company.getImage()).into(company_image);
         }
+
     }
 
 }
